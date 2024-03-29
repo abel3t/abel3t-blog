@@ -9,6 +9,7 @@ const Author = defineTable({
 
 const Post = defineTable({
   columns: {
+    id: column.number({ primaryKey: true }),
     title: column.text(),
     body: column.text(),
     authorId: column.number({ references: () => Author.columns.id }),
@@ -18,6 +19,7 @@ const Post = defineTable({
 const Comment = defineTable({
   columns: {
     authorId: column.number({ references: () => Author.columns.id }),
+    postId: column.number({ references: () => Post.columns.id }),
     body: column.text(),
     likes: column.number(),
     published: column.date(),
@@ -27,6 +29,7 @@ const Comment = defineTable({
 
 export default defineDb({
   tables: {
+    Author,
     Post,
     Comment,
   },
